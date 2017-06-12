@@ -150,7 +150,7 @@ void loop(void)
       if (millis() % 2000 < 1000) {
         arduboy.print("Press A Button");
       } else arduboy.print("Press   Button");
-      if (arduboy.pressed(A_BUTTON || B_BUTTON) == true) {
+      if (arduboy.pressed(A_BUTTON) || arduboy.pressed(B_BUTTON) == true) {
         arduboy.initRandomSeed();
         screenState = 1;
       }
@@ -162,10 +162,7 @@ void loop(void)
       arduboy.setCursor(WIDTH / 2 - 10, HEIGHT - 7);
       arduboy.print("SPEED: ");
       arduboy.print(curSpeed);
-      //tinyfont.setCursor(WIDTH / 2 + 28, HEIGHT - 5);
-      //tinyfont.print("MIN: ");
-      //tinyfont.print(minSpeed);
-      //travel = 0;
+
 #ifdef SHOW_FPS
       fpsCounter++;
       actualTime = millis();
@@ -239,6 +236,8 @@ void starsDraw(float travelx, float travely)
 
       stars[i].screen_x = stars[i].x / stars[i].z * 100 + WIDTH / 2;
       stars[i].screen_y = stars[i].y / stars[i].z * 100 + HEIGHT / 2;
+      stars[i].old_screen_x = stars[i].screen_x;
+      stars[i].old_screen_y = stars[i].screen_y;
 
 
 
